@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from dogs.models import Breed, Dog
@@ -47,3 +47,11 @@ def dog_create_view(request):
         'form': DogForm
     }
     return render(request,'dogs/create.html',context = context)
+
+def dog_detail_view(request,pk):
+    dog_object = Dog.objects.get(pk=pk)
+    context = {
+        'object':dog_object,
+        'title': dog_object
+    }
+    return render(request,'dogs/detail.html',context = context)
