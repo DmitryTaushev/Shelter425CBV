@@ -9,6 +9,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+blabla.txt
 .Python
 .env
 build/
