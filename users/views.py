@@ -63,11 +63,11 @@ def user_update_view(request):
             user_object.save()
             return HttpResponseRedirect(reverse('users:user_profile'))
     context = {
-        'object':user_object,
-        'title':f'Изменить профиль {user_object.first_name} {user_object.last_name}',
-        'form':UserUpdateForm(instance=user_object)
+        'object': user_object,
+        'title': f'Изменить профиль {user_object.first_name} {user_object.last_name}',
+        'form': UserUpdateForm(instance=user_object)
     }
-    return render(request,'users/user_update.html',context=context)
+    return render(request,'users/user_update.html',context)
 
 
 @login_required
