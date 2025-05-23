@@ -6,8 +6,10 @@ NULLABLE = {'blank':True,'null':True}
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True,verbose_name='Email')
+    first_name = models.CharField(max_length=150,verbose_name='Имя',default='Anonymous')
     phone = models.CharField(unique = True,max_length=35,verbose_name='Телефон',**NULLABLE)
     telegram = models.CharField(max_length=150,unique=True,verbose_name='Телеграмм',**NULLABLE)
+    avatar = models.ImageField(upload_to='users/',verbose_name = 'Аватар',**NULLABLE)
     is_active = models.BooleanField(default = True, verbose_name = 'Активность')
 
     USERNAME_FIELD = 'email'
