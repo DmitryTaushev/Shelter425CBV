@@ -2,6 +2,7 @@ from django.shortcuts import render,reverse,redirect
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from users.forms import UserRegisterForm, UserLoginForm
 
@@ -40,7 +41,7 @@ def user_login_view(request):
     }
     return render(request,'users/user_login.html',context=context)
 
-
+@login_required
 def user_profile_view(request):
     user_object = request.user
     if user_object.first_name and user_object.last_name:
@@ -52,6 +53,8 @@ def user_profile_view(request):
     }
     return render(request, 'users/user_profile_read_only.html',context = context)
 
+
+@login_required
 def user_logout_view(request):
     logout(request)
     return redirect('dogs:index')
