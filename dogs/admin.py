@@ -9,6 +9,6 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Dog)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('pk','name','breed',)
+    list_display = ('pk','name','breed','owner')
     list_filter = ('breed',)
     ordering = ('name',)
