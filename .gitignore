@@ -114,6 +114,8 @@ pip-selfcheck.json
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/Django_framework.iml
+.idea/**/misc.xml
 
 # AWS User-specific
 .idea/**/aws.xml
