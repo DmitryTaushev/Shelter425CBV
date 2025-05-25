@@ -7,7 +7,7 @@ def validate_password(field):
     language = settings.LANGUAGE_CODE
     error_message = [
         {
-            'ru-ru': 'Пароль должен содержать только латинский буквы и цифры',
+            'ru-ru': 'Пароль должен содержать только латинскиe буквы и цифры',
             'en-us': 'Must contain A-Z a-z letters and 0-9 numbers'
         },
         {
