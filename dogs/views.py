@@ -57,32 +57,37 @@ class DogDetailView(DetailView):
         context_data['title'] = f'Подробная информация {object_}'
         return context_data
 
+class DogUpdateView(UpdateView):
+    model = Dog
+    form_class = DogForm
+    template_name = 'dogs/create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        object_ = self.get_object()
+        context_data['title'] = f'Подробная информация {object_}'
+        return context_data
+
+    def get_success_url(self):
+        return reverse('dogs:dog_detail', args = [self.kwargs.get('pk')])
+
 
 # @login_required(login_url='users:user_login')
-# def dog_detail_view(request,pk):
-#     dog_object = Dog.objects.get(pk=pk)
+# def dog_update_view(request,pk):
+#     dog_object = get_object_or_404(Dog,pk=pk)
+#     if request.method == "POST":
+#         form = DogForm(request.POST,request.FILES,instance = dog_object)
+#         if form.is_valid():
+#             dog_object = form.save()
+#             dog_object.save()
+#             return HttpResponseRedirect(reverse('dogs:dog_detail',args={pk:pk}))
 #     context = {
+#
 #         'object':dog_object,
-#         'title': dog_object
+#         'title': 'Изменить собаку',
+#         'form':DogForm(instance=dog_object)
 #     }
-#     return render(request,'dogs/detail.html',context = context)
-
-@login_required(login_url='users:user_login')
-def dog_update_view(request,pk):
-    dog_object = get_object_or_404(Dog,pk=pk)
-    if request.method == "POST":
-        form = DogForm(request.POST,request.FILES,instance = dog_object)
-        if form.is_valid():
-            dog_object = form.save()
-            dog_object.save()
-            return HttpResponseRedirect(reverse('dogs:dog_detail',args={pk:pk}))
-    context = {
-
-        'object':dog_object,
-        'title': 'Изменить собаку',
-        'form':DogForm(instance=dog_object)
-    }
-    return render(request,'dogs/create_update.html',context=context)
+#     return render(request,'dogs/create_update.html',context=context)
 
 @login_required(login_url='users:user_login')
 def dog_delete_view(request,pk):
