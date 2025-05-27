@@ -71,6 +71,10 @@ class UserPasswordChangeView(PasswordChangeView):
         return context_data
 
 class UserLogoutView(LogoutView):
+    template_name = 'users/user_logout.html'
+    extra_context = {
+        'title': 'Выход из аккаунта'
+    }
     pass
 
 # @login_required(login_url='users:user_login')
