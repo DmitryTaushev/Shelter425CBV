@@ -23,6 +23,11 @@ class UserRegisterView(CreateView):
     extra_context = {
         'title':'Создать аккаунт'
     }
+    def form_valid(self, form):
+        self.object = form.save()
+        send_register_email(self.object.email)
+        return super().form_valid(form)
+
 
 class UserLoginView(LoginView):
     form_class = UserLoginForm
@@ -77,10 +82,6 @@ class UserLogoutView(LogoutView):
     }
     pass
 
-# @login_required(login_url='users:user_login')
-# def user_logout_view(request):
-#     logout(request)
-#     return redirect('dogs:index')
 
 @login_required(login_url='users:user_login')
 def user_generate_new_password_view(request):
