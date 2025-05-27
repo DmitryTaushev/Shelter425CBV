@@ -65,38 +65,19 @@ class DogUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         object_ = self.get_object()
-        context_data['title'] = f'Подробная информация {object_}'
+        context_data['title'] = f'Изменить данные{object_}'
         return context_data
 
     def get_success_url(self):
         return reverse('dogs:dog_detail', args = [self.kwargs.get('pk')])
 
+class DogDeleteView(DeleteView):
+    model = Dog
+    template_name = 'dogs/delete.html'
+    success_url = reverse_lazy('dogs:dogs_list')
 
-# @login_required(login_url='users:user_login')
-# def dog_update_view(request,pk):
-#     dog_object = get_object_or_404(Dog,pk=pk)
-#     if request.method == "POST":
-#         form = DogForm(request.POST,request.FILES,instance = dog_object)
-#         if form.is_valid():
-#             dog_object = form.save()
-#             dog_object.save()
-#             return HttpResponseRedirect(reverse('dogs:dog_detail',args={pk:pk}))
-#     context = {
-#
-#         'object':dog_object,
-#         'title': 'Изменить собаку',
-#         'form':DogForm(instance=dog_object)
-#     }
-#     return render(request,'dogs/create_update.html',context=context)
-
-@login_required(login_url='users:user_login')
-def dog_delete_view(request,pk):
-    dog_object = get_object_or_404(Dog, pk=pk)
-    if request.method == "POST":
-        dog_object.delete()
-        return HttpResponseRedirect(reverse('dogs:dogs_list'))
-    context = {
-        'object':dog_object,
-        'title':'Удалить собаку'
-    }
-    return render(request,'dogs/delete.html',context = context)
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        object_ = self.get_object()
+        context_data['title'] = f'Удалить {object_}'
+        return context_data
