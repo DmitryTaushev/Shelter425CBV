@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render
 from django.template.context_processors import request
 from django.http import Http404
@@ -17,21 +19,41 @@ def index_view(request):
     }
     return render(request, 'dogs/index.html',context = context)
 
-def breeds_list_view(request):
-    context = {
-        'object_list':Breed.objects.all(),
-        'title': 'Питомник - Все наши породы'
-    }
-    return render(request,'dogs/breeds.html',context = context)
+# def breeds_list_view(request):
+#     context = {
+#         'object_list':Breed.objects.all(),
+#         'title': 'Питомник - Все наши породы'
+#     }
+#     return render(request,'dogs/breeds.html',context = context)
 
-def breed_dogs_list_view(request,pk:int):
-    breed_object = Breed.objects.get(pk=pk)
-    context = {
-        'object_list': Dog.objects.filter(breed_id = pk),
-        'title':f'Собаки породы - {breed_object.name}',
-        'breed_pk': breed_object.pk
+class BreedsListView(ListView):
+    model = Breed
+    extra_context = {
+        'title':'Все наши породы'
     }
-    return render(request, 'dogs/dogs.html',context=context)
+    template_name = 'dogs/breeds.html'
+
+class DogBreedListView(LoginRequiredMixin,ListView):
+    model = Dog
+    template_name = 'dogs/dogs.html'
+    extra_context = {
+        'title':'Собаки выбранной породы'
+    }
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(breed_id=self.kwargs.get('pk'))
+        return queryset
+
+
+
+# def breed_dogs_list_view(request,pk:int):
+#     breed_object = Breed.objects.get(pk=pk)
+#     context = {
+#         'object_list': Dog.objects.filter(breed_id = pk),
+#         'title':f'Собаки породы - {breed_object.name}',
+#         'breed_pk': breed_object.pk
+#     }
+#     return render(request, 'dogs/dogs.html',context=context)
 
 class DogListView(ListView):
     model = Dog
@@ -56,7 +78,7 @@ class DogCreateView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
-#Create Read Update Delete (CRUD)
+
 
 class DogDetailView(DetailView):
     model = Dog
@@ -64,7 +86,7 @@ class DogDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        object_ = self.get_object()
+        object_ = context_data['object']
         context_data['title'] = f'Подробная информация {object_}'
         return context_data
 
