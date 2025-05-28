@@ -9,8 +9,8 @@ app_name = DogsConfig.name
 
 urlpatterns = [
     #breeds
-    path('',cache_page(60)(index_view),name = 'index'),
-    path('breeds/', cache_page(60)(BreedsListView.as_view()), name ='breeds'),
+    path('',cache_page(1)(index_view),name = 'index'),
+    path('breeds/', cache_page(1)(BreedsListView.as_view()), name ='breeds'),
 
     #dogs
     path('breeds/<int:pk>/dogs/',DogBreedListView.as_view(),name = 'breed_dogs'),
