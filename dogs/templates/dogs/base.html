@@ -55,8 +55,10 @@
                      alt="Card image cap"
                 >
                 <strong>Питомник</strong>
+            </a>
                 {% if user.is_authenticated %}
-                <span class="text-muted" style="margin-left: 50px">{{ user }}</span>
+            <a href="{% url 'users:user_profile' %}" class="navbar-brand d-flex" style="margin-right: 750px">
+                <span class="text-muted">{{ user }}
                 {% endif %}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
