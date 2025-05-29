@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 
 from dogs.models import Breed, Dog, DogParent
 from dogs.forms import DogForm, DogParentForm
+from users.models import UserRoles
 
 def index_view(request):
     context = {
@@ -19,12 +20,6 @@ def index_view(request):
     }
     return render(request, 'dogs/index.html',context = context)
 
-# def breeds_list_view(request):
-#     context = {
-#         'object_list':Breed.objects.all(),
-#         'title': 'Питомник - Все наши породы'
-#     }
-#     return render(request,'dogs/breeds.html',context = context)
 
 class BreedsListView(ListView):
     model = Breed
@@ -46,21 +41,33 @@ class DogBreedListView(LoginRequiredMixin,ListView):
 
 
 
-# def breed_dogs_list_view(request,pk:int):
-#     breed_object = Breed.objects.get(pk=pk)
-#     context = {
-#         'object_list': Dog.objects.filter(breed_id = pk),
-#         'title':f'Собаки породы - {breed_object.name}',
-#         'breed_pk': breed_object.pk
-#     }
-#     return render(request, 'dogs/dogs.html',context=context)
-
 class DogListView(ListView):
     model = Dog
     extra_context = {
         'title':'Питомник - все наши собаки'
     }
     template_name = 'dogs/dogs.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+
+class DogDeactivatedListView(LoginRequiredMixin,ListView):
+    model = Dog
+    extra_context = {
+        'title':'Питомник - все наши собаки'
+    }
+    template_name = 'dogs/dogs.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.role in [UserRoles.ADMIN,UserRoles.MODERATOR]:
+            queryset = queryset.filter(is_active=False)
+        if self.request.user.role == UserRoles.USER:
+            queryset = queryset.filter(is_active=False,owner=self.request.user)
+        return queryset
 
 class DogCreateView(LoginRequiredMixin,CreateView):
     model = Dog
