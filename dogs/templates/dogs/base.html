@@ -57,8 +57,8 @@
                 <strong>Питомник</strong>
             </a>
                 {% if user.is_authenticated %}
-            <a href="{% url 'users:user_profile' %}" class="navbar-brand d-flex" style="margin-right: 750px">
-                <span class="text-muted">{{ user }}
+            <a href="{% url 'users:user_profile' %}" class="navbar-brand d-flex">
+                <span>Пользователь:&nbsp;</span><span class="text-muted"> {{ user }}</span>
                 {% endif %}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
