@@ -12,20 +12,24 @@
             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                 <li>Email: {{ object.email }}</li>
                 <li>Телефон: {{ object.phone|default:'не указан' }}</li>
-                <li>Телеграм: {{  object.telegram|default:'не указан' }}</li>
+                <li>Телеграм: {{ object.telegram|default:'не указан' }}</li>
             </ul>
-        </div>
-        {% if user.is_authenticated and user.role == 'admin' %}
-            {% if not object.role == 'admin' %}
-            <a class="btn btn-lg btn-block btn-outline-danger"
-               href="{% url 'users:user_delete' object.pk %}">
+            <a class="btn btn-lg btn-block btn-outline-info"
+                href="{% url 'users:user_detail' object.pk %}">
+                Подробнее
+
+            </a>
+            {% if user.is_authenticated and user.role == 'admin' %}
+                {% if not object.role == 'admin' %}
+                <a class="btn btn-lg btn-block btn-outline-danger"
+                    href="{% url 'users:user_delete' object.pk %}">
 
                 Удалить
 
 
-
-            </a>
+                </a>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
 </div>

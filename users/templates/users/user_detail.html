@@ -1,0 +1,41 @@
+{% extends 'dogs/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                Профиль {{ object.first_name }} {{ object.last_name }}
+            </div>
+            <img class="card-img-top"
+                 src="{{ object.avatar|user_media }}" width="300" height="320"
+                 alt="Card image cap">
+            <div class="card-body">
+                <span class="card-text">Почта: {{ object.email }}</span><br>
+                <span class="card-text">Имя: {{ object.first_name|default:'Не указано' }}</span><br>
+                <span class="card-text">Фамилия: {{ object.last_name|default:'Не указано' }}</span><br>
+                <span class="card-text">Телефон: {{ object.phone|default:'Не указано' }}</span><br>
+                <span class="card-text">Телеграм: {{ object.telegram|default:'Не указано' }}</span><br>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'users:users_list' %}" class="btn btn-outline-primary"><< Назад</a>
+                {% if user.is_authenticated and user.role == 'admin' %}
+                {% if not object.role == 'admin' %}
+                <a class="btn btn-lg btn-block btn-outline-danger"
+                    href="{% url 'users:user_delete' object.pk %}">
+
+                Удалить
+
+
+                </a>
+                {% endif %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
