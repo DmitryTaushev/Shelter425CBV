@@ -17,6 +17,11 @@ class DogForm(StyleFormMixin,forms.ModelForm):
             raise forms.ValidationError('Собака должна быть моложе 35-ти лет')
         return cleaned_data
 
+class DogAdminForm(DogForm):
+    class Meta:
+        model = Dog
+        exclude = ('is_active',)
+
 class DogParentForm(StyleFormMixin,forms.ModelForm):
     class Meta:
         model = DogParent
