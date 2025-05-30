@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
-from django.views.generic import CreateView,UpdateView,DetailView
+from django.views.generic import CreateView,UpdateView,DetailView,ListView,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
 
 from users.models import User
@@ -82,6 +83,30 @@ class UserLogoutView(LogoutView):
     }
     pass
 
+class UserListView(LoginRequiredMixin,ListView):
+    model = User
+    extra_context = {
+        'title':'Питомник все наши пользователи'
+    }
+    template_name = 'users/users.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+class UserDeleteView(PermissionRequiredMixin,DeleteView):
+    model = User
+    template_name = 'users/user_delete.html'
+    success_url = reverse_lazy('users:users_list')
+    permission_required = 'users.delete_user'
+    permission_denied_message = 'У вас нет нужных прав для данного действия'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        object_ = self.get_object()
+        context_data['title'] = f'Удалить {object_}'
+        return context_data
 
 @login_required(login_url='users:user_login')
 def user_generate_new_password_view(request):

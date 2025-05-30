@@ -7,16 +7,16 @@
         <div class="card">
                 <div class="card-header">
                     {% if object %}
-                    Вы уверены что хотите удалить собаку?
+                    Вы уверены что хотите удалить пользователя?
                     {% endif %}
                 </div>
             <div class="card-body">
                 <img class="card-img-top"
-                src="{{ object.photo|dogs_media }}" width="300" height="320"
+                src="{{ object.photo|user_media }}" width="300" height="320"
                 alt="Card image cap">
 
             <div class="card-body">
-                <p class="card-text">{{ object.name|title }}</p>
+                <p class="card-text">{{ object.email|title }}</p>
             </div>
             {% csrf_token %}
             {{ form.as_p }}
@@ -25,7 +25,7 @@
                 Удалить
                 {% endif %}
             </button>
-            <a class="btn btn-outline-primary float-left" href="{% url 'dogs:dogs_list' %}"> Назад </a>
+            <a class="btn btn-outline-primary float-left" href="{% url 'users:users_list' %}"> Назад </a>
             </div>
         </div>
     </div>
