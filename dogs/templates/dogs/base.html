@@ -19,7 +19,7 @@
             <div class="row" style="margin-left: 200px">
                 <div class="col-sm-8 col-md-7 py-4">
                     <img class="card-img-top"
-                        src='/static/all_dogs.jpg' width="300" height="320"
+                        src='/static/all_dogs.jpg' width="600" height="320"
                         alt="Card image cap">
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4" style="margin-top:80px">
@@ -31,6 +31,7 @@
                         <li><a href="{% url 'dogs:index' %}" class="text-white">Главная</a></li>
                         <li><a href="{% url 'dogs:breeds' %}" class="text-white">Породы</a></li>
                         <li><a href="{% url 'dogs:dogs_list' %}" class="text-white">Собаки</a></li>
+                        <li><a href="{% url 'reviews:reviews_list' %}" class="text-white">Наши отзывы</a></li>
                         <li><a href="{% url 'dogs:dog_create' %}" class="text-white">Добавить собаку</a></li>
                         {% if user.is_authenticated %}
                             <li><a href="{% url 'users:users_list' %}" class="text-white">Все пользователи</a></li>

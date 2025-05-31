@@ -1,0 +1,15 @@
+{% extends 'dogs/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for object in object_list %}
+        {% include 'reviews/includes/inc_review_card.html' with object=object %}
+        {% endfor %}
+    </div>
+<!--    <a href="{% url 'dogs:dogs_list' %}" class="btn btn-outline-success m-2">Активные собаки</a>-->
+<!--    <a href="{% url 'dogs:dogs_deactivated_list' %}" class="btn btn-outline-secondary m-2">Неактивные собаки</a>-->
+</div>
+
+{% endblock %}
