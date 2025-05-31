@@ -91,7 +91,7 @@ class DogCreateView(LoginRequiredMixin,CreateView):
 
 
 
-class DogDetailView(DetailView):
+class DogDetailView(LoginRequiredMixin,DetailView):
     model = Dog
     template_name = 'dogs/detail.html'
 
