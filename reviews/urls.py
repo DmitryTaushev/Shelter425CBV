@@ -3,7 +3,7 @@ from django.urls import path
 from reviews.apps import ReviewsConfig
 
 from reviews.views import (ReviewListView,ReviewDeactivatedListView,ReviewCreateView,
-                           ReviewDeleteView,ReviewDetailView,ReviewUpdateView)
+                           ReviewDeleteView,ReviewDetailView,ReviewUpdateView,review_toggle_activity)
 
 app_name = ReviewsConfig.name
 
@@ -14,4 +14,5 @@ urlpatterns = [
     path('detail/<slug:slug>/',ReviewDetailView.as_view(),name='reviews_detail'),
     path('update/<slug:slug>/',ReviewUpdateView.as_view(),name='reviews_update'),
     path('delete/<slug:slug>/',ReviewDeleteView.as_view(),name='reviews_delete'),
+    path('toggle/<slug:slug>/',review_toggle_activity,name='reviews_toggle'),
 ]
