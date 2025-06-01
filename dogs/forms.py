@@ -5,10 +5,10 @@ from dogs.models import Dog, DogParent
 from users.forms import StyleFormMixin
 
 
-class DogForm(StyleFormMixin,forms.ModelForm):
+class DogForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Dog
-        exclude = ('owner','is_active','views')
+        exclude = ('owner', 'is_active', 'views')
 
     def clean_birth_date(self):
         cleaned_data = self.cleaned_data['birth_date']
@@ -17,12 +17,14 @@ class DogForm(StyleFormMixin,forms.ModelForm):
             raise forms.ValidationError('Собака должна быть моложе 35-ти лет')
         return cleaned_data
 
+
 class DogAdminForm(DogForm):
     class Meta:
         model = Dog
         exclude = ('is_active',)
 
-class DogParentForm(StyleFormMixin,forms.ModelForm):
+
+class DogParentForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = DogParent
         fields = '__all__'

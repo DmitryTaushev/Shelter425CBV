@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('dogs', '0002_dog'),
     ]
@@ -29,7 +28,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dog',
             name='breed',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dogs.breed', verbose_name='Порода'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dogs.breed',
+                                    verbose_name='Порода'),
         ),
         migrations.AlterField(
             model_name='dog',

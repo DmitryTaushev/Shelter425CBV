@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -24,8 +23,11 @@ class Migration(migrations.Migration):
                 ('content', models.TextField(verbose_name='Содержимое')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Создан')),
                 ('sign_of_review', models.BooleanField(default=True, verbose_name='Активный')),
-                ('author', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='Автор')),
-                ('dog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dogs', to='dogs.dog', verbose_name='Собака')),
+                ('author', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                             to=settings.AUTH_USER_MODEL, verbose_name='Автор')),
+                ('dog',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dogs', to='dogs.dog',
+                                   verbose_name='Собака')),
             ],
             options={
                 'verbose_name': 'review',

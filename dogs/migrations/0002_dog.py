@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('dogs', '0001_initial'),
     ]
@@ -18,7 +17,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=250, verbose_name='dog name')),
                 ('photo', models.ImageField(blank=True, null=True, upload_to='dogs/', verbose_name='image')),
                 ('birth_date', models.DateField(blank=True, null=True, verbose_name='birth_date')),
-                ('breed', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dogs.breed', verbose_name='breed')),
+                ('breed',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dogs.breed', verbose_name='breed')),
             ],
             options={
                 'verbose_name': 'dog',

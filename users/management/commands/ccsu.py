@@ -1,17 +1,18 @@
 from django.core.management import BaseCommand
 
-from users.models import User,UserRoles
+from users.models import User, UserRoles
+
 
 class Command(BaseCommand):
-    def handle(self,*args,**kwargs):
+    def handle(self, *args, **kwargs):
         admin = User.objects.create(
-            email = 'admin@web.top',
-            first_name = 'Admin',
-            last_name = 'Adminov',
-            role = UserRoles.ADMIN,
-            is_staff = True,
-            is_superuser = True,
-            is_active = True,
+            email='admin@web.top',
+            first_name='Admin',
+            last_name='Adminov',
+            role=UserRoles.ADMIN,
+            is_staff=True,
+            is_superuser=True,
+            is_active=True,
         )
         admin.set_password('qwerty')
         admin.save()
@@ -42,4 +43,3 @@ class Command(BaseCommand):
         user.set_password('qwerty')
         user.save()
         print('User Created')
-

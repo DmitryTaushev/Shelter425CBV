@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('dogs', '0003_alter_breed_description_alter_breed_name_and_more'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
@@ -16,6 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dog',
             name='owner',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='Хозяин'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                    to=settings.AUTH_USER_MODEL, verbose_name='Хозяин'),
         ),
     ]
