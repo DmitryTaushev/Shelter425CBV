@@ -18,7 +18,7 @@ class Review(models.Model):
         return f'{self.title}'
 
     def get_absolute_url(self):
-        return reverse('reviews:review_detail',kwargs={'slug': self.slug})
+        return reverse('reviews:reviews_detail',kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'review'

@@ -86,7 +86,7 @@ class UserLogoutView(LogoutView):
 class UserListView(LoginRequiredMixin,ListView):
     model = User
     extra_context = {
-        'title':'Питомник все наши пользователи'
+        'title':'Все наши пользователи'
     }
     template_name = 'users/users.html'
 
