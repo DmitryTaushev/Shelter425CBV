@@ -212,3 +212,20 @@ def dog_toggle_activity(requset,pk):
         dog_item.is_active=True
     dog_item.save()
     return redirect(reverse('dogs:dogs_list'))
+
+class BreedDogSearchListView(LoginRequiredMixin,ListView):
+    model = Breed
+    template_name = 'dogs/breed_dog_search_result.html'
+    extra_context = {
+        'title':'Результаты поискового запроса'
+    }
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        dog_object_list = Dog.objects.filter(
+            Q(name__icontains=query,is_active=True)
+        )
+        breed_object_list = Breed.objects.filter(
+            Q(name__icontains=query)
+        )
+        object_list = list(dog_object_list) + list(breed_object_list)
+        return object_list
