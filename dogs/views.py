@@ -9,6 +9,7 @@ from django.views.generic import ListView,CreateView,DetailView, UpdateView, Del
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 from dogs.models import Breed, Dog, DogParent
 from dogs.forms import DogForm, DogParentForm,DogAdminForm
@@ -17,7 +18,7 @@ from users.models import UserRoles
 
 def index_view(request):
     context = {
-        'object_list':Breed.objects.all()[:3],
+        'object_list':Breed.objects.all(),
         'title': 'Питомник - Главная'
     }
     return render(request, 'dogs/index.html',context = context)
@@ -29,6 +30,7 @@ class BreedsListView(ListView):
         'title':'Все наши породы'
     }
     template_name = 'dogs/breeds.html'
+    paginate_by = 3
 
 class DogBreedListView(LoginRequiredMixin,ListView):
     model = Dog
@@ -49,6 +51,7 @@ class DogListView(ListView):
         'title':'Питомник - все наши собаки'
     }
     template_name = 'dogs/dogs.html'
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -70,6 +73,16 @@ class DogDeactivatedListView(LoginRequiredMixin,ListView):
         if self.request.user.role == UserRoles.USER:
             queryset = queryset.filter(is_active=False,owner=self.request.user)
         return queryset
+
+class DogSearchListView(LoginRequiredMixin,ListView):
+    model = Dog
+    template_name = 'dogs/dog_search_result.html'
+    queryset = Dog.objects.filter(name__icontains='м')
+
+    def get_queryset(self):
+        return Dog.objects.filter(
+            Q(name__icontains='м')
+        )
 
 class DogCreateView(LoginRequiredMixin,CreateView):
     model = Dog

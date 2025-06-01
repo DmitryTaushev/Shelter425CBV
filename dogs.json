@@ -1,1 +1,127 @@
-[{"model": "dogs.breed", "pk": 1, "fields": {"name": "Немецкая овчарка", "description": "Хороший сторож,большая и пушистая"}}, {"model": "dogs.breed", "pk": 2, "fields": {"name": "Колли", "description": "Снималась в кино"}}, {"model": "dogs.breed", "pk": 3, "fields": {"name": "Джек Рассел Терьер", "description": "Активная порода,известная по фильму маска"}}, {"model": "dogs.breed", "pk": 4, "fields": {"name": "Чихуахуа", "description": "Зло во плоти"}}, {"model": "dogs.breed", "pk": 5, "fields": {"name": "Бордоский дог", "description": "Древняя французская порода собак."}}, {"model": "dogs.dog", "pk": 1, "fields": {"name": "Мухтар", "breed": 1, "photo": "dogs/dogs_deutch_nA4HFTu.jpg", "birth_date": "2023-08-08", "is_active": true, "owner": null, "views": 0}}, {"model": "dogs.dog", "pk": 2, "fields": {"name": "Лесси", "breed": 2, "photo": "dogs/kolli-27.09.24-01.png", "birth_date": "2023-10-08", "is_active": true, "owner": 2, "views": 0}}, {"model": "dogs.dog", "pk": 4, "fields": {"name": "Бобби", "breed": 3, "photo": "dogs/jack.jpg", "birth_date": "2024-04-04", "is_active": true, "owner": null, "views": 0}}, {"model": "dogs.dog", "pk": 5, "fields": {"name": "Джерри Ли", "breed": 1, "photo": "dogs/jerry_li.jpg", "birth_date": "1989-05-06", "is_active": true, "owner": null, "views": 0}}, {"model": "dogs.dog", "pk": 6, "fields": {"name": "Хутч", "breed": 5, "photo": "dogs/hutch.jpg", "birth_date": "1989-12-01", "is_active": true, "owner": 1, "views": 0}}, {"model": "dogs.dogparent", "pk": 1, "fields": {"dog": 2, "name": "Бернард", "breed": 2, "birth_date": "2018-05-05"}}, {"model": "dogs.dogparent", "pk": 2, "fields": {"dog": 2, "name": "Берта", "breed": 2, "birth_date": "2018-09-09"}}]
+[
+  {
+    "model": "dogs.breed",
+    "pk": 1,
+    "fields": {
+      "name": "Немецкая овчарка",
+      "description": "Хороший сторож,большая и пушистая"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 2,
+    "fields": {
+      "name": "Колли",
+      "description": "Снималась в кино"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 3,
+    "fields": {
+      "name": "Джек Рассел Терьер",
+      "description": "Активная порода,известная по фильму маска"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 4,
+    "fields": {
+      "name": "Чихуахуа",
+      "description": "Зло во плоти"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 5,
+    "fields": {
+      "name": "Бордоский дог",
+      "description": "Древняя французская порода собак."
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 1,
+    "fields": {
+      "name": "Мухтар",
+      "breed": 1,
+      "photo": "dogs/dogs_deutch_nA4HFTu.jpg",
+      "birth_date": "2023-08-08",
+      "is_active": true,
+      "owner": null,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 2,
+    "fields": {
+      "name": "Лесси",
+      "breed": 2,
+      "photo": "dogs/kolli-27.09.24-01.png",
+      "birth_date": "2023-10-08",
+      "is_active": true,
+      "owner": 2,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 4,
+    "fields": {
+      "name": "Бобби",
+      "breed": 3,
+      "photo": "dogs/jack.jpg",
+      "birth_date": "2024-04-04",
+      "is_active": true,
+      "owner": null,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 5,
+    "fields": {
+      "name": "Джерри Ли",
+      "breed": 1,
+      "photo": "dogs/jerry_li.jpg",
+      "birth_date": "1989-05-06",
+      "is_active": true,
+      "owner": null,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 6,
+    "fields": {
+      "name": "Хутч",
+      "breed": 5,
+      "photo": "dogs/hutch.jpg",
+      "birth_date": "1989-12-01",
+      "is_active": true,
+      "owner": 1,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dogparent",
+    "pk": 1,
+    "fields": {
+      "dog": 2,
+      "name": "Бернард",
+      "breed": 2,
+      "birth_date": "2018-05-05"
+    }
+  },
+  {
+    "model": "dogs.dogparent",
+    "pk": 2,
+    "fields": {
+      "dog": 2,
+      "name": "Берта",
+      "breed": 2,
+      "birth_date": "2018-09-09"
+    }
+  }
+]
